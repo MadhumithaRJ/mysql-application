@@ -7,12 +7,12 @@ pipeline {
     }
 
     environment{
-        SCANNER_HOHE= tool 'sonar-scanner'
+        SCANNER_HOHE= tool 'sonarqube-scanner'
     }
     stages {
         stage('Git Checkout') {
             steps {
-                 git branch: 'master', url: 'https://github.com/Srinu-rj/mysql-application'
+                 git branch: 'master', url: 'https://github.com/MadhumithaRJ/mysql-application.git'
             }
         }
 
@@ -34,7 +34,7 @@ pipeline {
                 script {
                  echo "sonarqube code analysis"
                  withSonarQubeEnv(credentialsId: 'sonar-token') {
-                     sh ''' $SCANNER_HOHE/bin/sonar-scanner -Dsonar.projectName=spring-application-with-  -Dsonar.projectKey=spring-application-with-mysql \
+                     sh ''' $SCANNER_HOHE/bin/sonarqube-scanner -Dsonar.projectName=spring-application-with-  -Dsonar.projectKey=spring-application-with-mysql \
                      -Dsonar.java.binaries=. '''
                      echo "End of sonarqube code analysis"
 
@@ -47,7 +47,7 @@ pipeline {
                 script {
                  echo "Docker Image started..."
                  withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                    sh "docker build -t ncpl-devops-one ."
+                    sh "docker build -t my-sql-app ."
                  }
                  echo "End of Docker Images"
                 }
@@ -59,8 +59,8 @@ pipeline {
                 script {
                     echo "Tag & Push to DockerHub Started..."
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                      sh "docker tag ncpl-devops-one srinu641/ncpl-devops-one:V3.001"
-                      sh "docker push srinu641/ncpl-devops-one:V3.001"
+                      sh "docker tag my-sql-app "
+                      sh "docker push my-sql-app"
                     }
                     echo "End of Tag & Push to DockerHub"
                 }
@@ -69,7 +69,7 @@ pipeline {
 
         stage('Docker Image Scan') {
             steps {
-                sh "trivy image --format table -o trivy-image-report.html srinu641/ncpl-devops-one:V3.001"
+                sh "trivy image my-sql-app"
             }
         }
 
