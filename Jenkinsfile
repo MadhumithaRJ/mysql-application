@@ -29,18 +29,18 @@ pipeline {
             }
         }
 
-        // stage('SonarQube-Analysis') {
-        //     steps {
-        //         script {
-        //          echo "sonarqube code analysis"
-        //          withSonarQubeEnv(credentialsId: 'sonar-token') {
-        //              sh 'mvn sonar:sonar -Dsonar.projectKey=my-sql -Dsonar.host.url=http://18.234.254.130:9000'
-        //              echo "End of sonarqube code analysis"
+        stage('SonarQube-Analysis') {
+            steps {
+                script {
+                 echo "sonarqube code analysis"
+                 withSonarQubeEnv(credentialsId: 'sonar-token') {
+                     sh 'mvn sonar:sonar -Dsonar.projectKey=my-sql -Dsonar.host.url=http://18.234.254.130:9000'
+                     echo "End of sonarqube code analysis"
 
-        //            }
-        //         }
-        //     }
-        // }
+                   }
+                }
+            }
+        }
         stage('Docker Images') {
             steps {
                 script {
@@ -58,8 +58,8 @@ pipeline {
                 script {
                     echo "Tag & Push to DockerHub Started..."
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                      sh "docker tag my-sql-app madhumithaj2000/my-sql-app:latest"
-                      sh "docker push madhumithaj2000/my-sql-app:latest "
+                      sh "docker tag my-sql-app madhumithaj2000/my-sql-app:v1"
+                      sh "docker push madhumithaj2000/my-sql-app:v1 "
                     }
                     echo "End of Tag & Push to DockerHub"
                 }
