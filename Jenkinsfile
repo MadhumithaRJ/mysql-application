@@ -58,7 +58,7 @@ pipeline {
                 script {
                     echo "Tag & Push to DockerHub Started..."
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                      sh "docker tag my-sql-app "
+                     
                       sh "docker push my-sql-app"
                     }
                     echo "End of Tag & Push to DockerHub"
