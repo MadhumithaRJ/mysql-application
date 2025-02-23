@@ -29,18 +29,18 @@ pipeline {
             }
         }
 
-        stage('SonarQube-Analysis') {
-            steps {
-                script {
-                 echo "sonarqube code analysis"
-                 withSonarQubeEnv(credentialsId: 'sonar-token') {
-                     sh 'mvn sonar:sonar -Dsonar.projectKey=my-sql -Dsonar.host.url=http://18.234.254.130:9000'
-                     echo "End of sonarqube code analysis"
+        // stage('SonarQube-Analysis') {
+        //     steps {
+        //         script {
+        //          echo "sonarqube code analysis"
+        //          withSonarQubeEnv(credentialsId: 'sonar-token') {
+        //              sh 'mvn sonar:sonar -Dsonar.projectKey=my-sql -Dsonar.host.url=http://18.234.254.130:9000'
+        //              echo "End of sonarqube code analysis"
 
-                   }
-                }
-            }
-        }
+        //            }
+        //         }
+        //     }
+        // }
         stage('Docker Images') {
             steps {
                 script {
