@@ -49,7 +49,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>ncpl-devops-one</finalName>
+		<finalName>my-sql-app</finalName>
 	</build>
 
 </project>
