@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment{
-        SCANNER_HOHE= tool 'sonarqube-scanner'
+        SCANNER_HOHE= tool 'SonarQube-Scanner'
     }
     stages {
         stage('Git Checkout') {
@@ -34,7 +34,7 @@ pipeline {
                 script {
                  echo "sonarqube code analysis"
                  withSonarQubeEnv(credentialsId: 'sonar-token') {
-                     sh ''' $SCANNER_HOHE/bin/sonarqube-scanner -Dsonar.projectName=spring-application-with-  -Dsonar.projectKey=spring-application-with-mysql \
+                     sh ''' $SCANNER_HOHE/bin/SonarQube-Scanner -Dsonar.projectName=spring-application-with-  -Dsonar.projectKey=spring-application-with-mysql \
                      -Dsonar.java.binaries=. '''
                      echo "End of sonarqube code analysis"
 
