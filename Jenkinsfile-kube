@@ -63,14 +63,8 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 script {
-                    echo "Deploying to Minikube..."
-                    withKubeConfig([credentialsId: 'kube-config'])
-                    sh '''
-                    kubectl get nodes
-                    kubectl apply -f deployment.yaml --validate=false
-                    kubectl apply -f service.yaml --validate=false
-                    '''
-                    echo "Deployment completed."
+                    kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kube-config")
+                    
                 }
             }
         }
