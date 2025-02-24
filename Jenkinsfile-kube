@@ -63,7 +63,7 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 script {
-                    kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kube-config")
+                    kubernetesDeploy(configs: "deployment.yaml,service.yaml", kubeconfigId: "kube-config")
                     
                 }
             }
