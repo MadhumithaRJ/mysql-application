@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-sql-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-sql-app
+  template:
+    metadata:
+      labels:
+        app: my-sql-app
+    spec:
+      containers:
+        - name: my-sql-app
+          image: madhumithaj2000/my-sql-app:latest
+          ports:
+            - containerPort: 6655
