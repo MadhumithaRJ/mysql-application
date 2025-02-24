@@ -66,23 +66,23 @@ pipeline {
             }
         }
 
-        // stage('Docker Image Scan') {
-        //     steps {
-        //         sh "trivy image my-sql-app"
-        //     }
-        // }
-        stage('Pull Docker Image') {
+        stage('Docker Image Scan') {
             steps {
-                sh "docker pull madhumithaj2000/my-sql-app:latest"
+                sh "trivy image my-sql-app"
             }
         }
-
-        stage('Run Container') {
+        stage('Deploy to Minikube') {
             steps {
-                sh "docker run -d --name my-sql-app-container -p 6655:6655 madhumithaj2000/my-sql-app:latest"
+                script {
+                    echo "Deploying to Minikube..."
+                    sh '''
+                    kubectl apply -f deployment.yaml
+                    kubectl apply -f service.yaml
+                    '''
+                    echo "Deployment completed."
+                }
             }
         }
-        
 
 
     }
