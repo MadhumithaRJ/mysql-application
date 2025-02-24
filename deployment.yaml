@@ -16,5 +16,5 @@ spec:
         - name: my-sql-app
           image: madhumithaj2000/my-sql-app:latest
           ports:
-            - containerPort: 9090
+            - containerPort: 6655
           
