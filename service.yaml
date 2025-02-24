@@ -10,4 +10,4 @@ spec:
     - protocol: TCP
       port: 6655
       targetPort: 6655
-      nodePort: 30005  # Choose a port between 30000-32767
+      type:nodePort  # Choose a port between 30000-32767
