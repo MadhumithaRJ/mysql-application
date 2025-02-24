@@ -10,4 +10,4 @@ spec:
     - protocol: TCP
       port: 6655
       targetPort: 6655
-      nodePort:31110  # Choose a port between 30000-32767
+      nodePort: 31110  # Choose a port between 30000-32767
