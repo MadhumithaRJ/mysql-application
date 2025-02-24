@@ -66,11 +66,11 @@ pipeline {
             }
         }
 
-        // stage('Docker Image Scan') {
-        //     steps {
-        //         sh "trivy image my-sql-app"
-        //     }
-        // }
+        stage('Docker Image Scan') {
+            steps {
+                sh "trivy image my-sql-app"
+            }
+        }
         stage('Pull Docker Image') {
             steps {
                 sh "docker pull madhumithaj2000/my-sql-app:latest"
