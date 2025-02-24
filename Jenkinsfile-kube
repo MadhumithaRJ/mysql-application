@@ -66,6 +66,7 @@ pipeline {
                     echo "Deploying to Minikube..."
                     withKubeConfig([credentialsId: 'kube-config'])
                     sh '''
+                    kubectl get nodes
                     kubectl apply -f deployment.yaml
                     kubectl apply -f service.yaml
                     '''
