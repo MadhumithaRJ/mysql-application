@@ -71,7 +71,6 @@ pipeline {
                 sh "trivy image my-sql-app"
             }
         }
-        stages {
         stage('Pull Docker Image') {
             steps {
                 sh "docker pull madhumithaj2000/my-sql-app:v2"
@@ -83,7 +82,7 @@ pipeline {
                 sh "docker run -d --name my-sql-app-container -p 6655:6655 madhumithaj2000/my-sql-app"
             }
         }
-
+        
 
 
     }
