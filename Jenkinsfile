@@ -58,8 +58,8 @@ pipeline {
                 script {
                     echo "Tag & Push to DockerHub Started..."
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                      sh "docker tag my-sql-app madhumithaj2000/my-sql-app:vv2"
-                      sh "docker push madhumithaj2000/my-sql-app:vv2 "
+                      sh "docker tag my-sql-app madhumithaj2000/my-sql-app:v3"
+                      sh "docker push madhumithaj2000/my-sql-app:v3 "
                     }
                     echo "End of Tag & Push to DockerHub"
                 }
@@ -73,13 +73,13 @@ pipeline {
         // }
         stage('Pull Docker Image') {
             steps {
-                sh "docker pull madhumithaj2000/my-sql-app:v2"
+                sh "docker pull madhumithaj2000/my-sql-app:latest"
             }
         }
 
         stage('Run Container') {
             steps {
-                sh "docker run -d --name my-sql-app-container -p 6655:6655 madhumithaj2000/my-sql-app"
+                sh "docker run -d --name my-sql-app-container -p 6655:6655 madhumithaj2000/my-sql-app:latest"
             }
         }
         
